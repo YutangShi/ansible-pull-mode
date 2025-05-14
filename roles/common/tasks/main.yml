@@ -2,7 +2,6 @@
   apt:
     name:
       - htop
-      - cron
       - nano
       - vim-tiny
       - git
@@ -24,19 +23,6 @@
 - name: Debug - Output metrics file status
   debug:
     var: metrics_file
-
-- name: Add metrics.sh to crontab
-  cron:
-    name: "Run metrics.sh every 5 minutes"
-    minute: "*/5"
-    job: "/metrics.sh"
-  when: metrics_file.stat.exists
-
-- name: Add ansible-pull to crontab
-  cron:
-    name: "Run ansible-pull every hour"
-    minute: "*/5"
-    job: "/usr/bin/ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git >> /log/ansible-pull.log 2>&1"
 
 - name: Create initial ansible pull log file
   file:

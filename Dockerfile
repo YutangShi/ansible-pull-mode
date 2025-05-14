@@ -43,5 +43,20 @@ RUN wget https://raw.githubusercontent.com/chusiang/ansible-jupyter.dockerfile/m
 
 EXPOSE 22
 
-# 啟動 sshd
-CMD ["/usr/sbin/sshd", "-D"]
+# 安裝 Supercronic 作為 cron 替代品
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.26/supercronic-linux-amd64 \
+    SUPERCRONIC=supercronic-linux-amd64 \
+    SUPERCRONIC_SHA1SUM=7a79496cf8ad899b99a719355d4db27422396735
+
+RUN curl -fsSLO "$SUPERCRONIC_URL" \
+    && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
+    && chmod +x "$SUPERCRONIC" \
+    && mv "$SUPERCRONIC" "/usr/local/bin/supercronic"
+
+# 建立必要的目錄
+RUN mkdir -p /log
+
+# 啟動 sshd 和 supercronic
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]
