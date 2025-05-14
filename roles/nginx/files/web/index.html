@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansible Pull 模式展示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #0066cc;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>歡迎使用 Ansible Pull 模式</h1>
+
+    <div class="info-box">
+        <h2>伺服器資訊</h2>
+        <p>此頁面由 Ansible Pull 模式自動部署</p>
+        <p>部署時間: <span id="deploy-time"></span></p>
+        <p>主機名稱: <span id="hostname"></span></p>
+    </div>
+
+    <p>本頁面透過 Ansible 自動化部署到 Nginx 伺服器。Ansible Pull 模式使每台伺服器能夠自主從版本控制系統拉取配置並應用。</p>
+
+    <h2>Ansible Pull 功能</h2>
+    <ul>
+        <li>高度延展性 - 適合管理大量伺服器</li>
+        <li>無需中央控制 - 每台主機獨立運作</li>
+        <li>適合動態 IP 環境</li>
+        <li>適合異地部署</li>
+    </ul>
+
+    <footer>
+        &copy; 2025 Ansible Pull 模式展示
+    </footer>
+
+    <script>
+        // 顯示目前日期時間
+        document.getElementById('deploy-time').textContent = new Date().toLocaleString('zh-TW');
+        
+        // 嘗試獲取主機名稱 (這需要後端支援)
+        fetch('/hostname')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('hostname').textContent = data;
+            })
+            .catch(err => {
+                document.getElementById('hostname').textContent = "資訊暫時無法獲取";
+            });
+    </script>
+</body>
+</html>

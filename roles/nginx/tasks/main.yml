@@ -4,6 +4,32 @@
     state: present
     update_cache: yes
 
+- name: Create /var/www directory
+  file:
+    path: "/var/www"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Copy web directory to /var/www
+  copy:
+    src: web/
+    dest: "/var/www/web"
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    directory_mode: '0755'
+
+- name: Copy Nginx configuration
+  copy:
+    src: default.conf
+    dest: "/etc/nginx/sites-available/default"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx
+
 - name: Ensure Nginx is running
   service:
     name: nginx
