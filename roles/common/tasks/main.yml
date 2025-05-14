@@ -11,7 +11,7 @@
 
 - name: Copy metrics.sh to local host with encrypted variables
   template:
-    src: metrics.sh.j2
+    src: metrics.sh
     dest: /metrics.sh
     mode: '0755'
 
