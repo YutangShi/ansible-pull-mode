@@ -3,3 +3,15 @@
     name: htop
     state: present
     update_cache: yes
+
+- name: Copy metrics.sh to local host
+  copy:
+    src: metrics.sh
+    dest: /metrics.sh
+    mode: '0755'
+
+- name: Add metrics.sh to crontab
+  cron:
+    name: "Run metrics.sh every 5 minutes"
+    minute: "*/5"
+    job: "/metrics.sh"

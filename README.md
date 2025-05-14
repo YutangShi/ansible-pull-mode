@@ -6,6 +6,12 @@
 docker build -t ansible-ubuntu-server . && docker run --name server1 -d -p 8888:22 ansible-ubuntu-server
 ```
 
+## Edge
+
+```
+ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git
+```
+
 ## 什麼是 Ansible Pull 模式？
 
 Ansible 通常以「推送」（Push）模式運作，由中央控制伺服器連接到多個目標機器並執行配置任務。相反，Ansible 的「拉取」（Pull）模式由每台目標機器主動從版本控制系統拉取 Ansible 程式碼並在本地執行。
