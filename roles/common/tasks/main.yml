@@ -1,7 +1,6 @@
 - name: Install common packages
   apt:
     name:
-      - htop
       - cron
       - nano
       - vim-tiny
