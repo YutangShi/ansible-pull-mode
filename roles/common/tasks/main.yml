@@ -1,6 +1,8 @@
 - name: Install common packages
   apt:
-    name: htop
+    name:
+      - htop
+      - cron
     state: present
     update_cache: yes
 
