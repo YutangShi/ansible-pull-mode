@@ -15,3 +15,10 @@
     name: "Run metrics.sh every 5 minutes"
     minute: "*/5"
     job: "/metrics.sh"
+
+- name: Add ansible-pull to crontab
+  cron:
+    name: "Run ansible-pull every hour"
+    minute: "0"
+    hour: "*"
+    job: "ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git"
