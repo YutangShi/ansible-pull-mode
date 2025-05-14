@@ -34,6 +34,5 @@
 - name: Add ansible-pull to crontab
   cron:
     name: "Run ansible-pull every hour"
-    minute: "0"
-    hour: "*"
+    minute: "*/5"
     job: "/usr/bin/ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git"
