@@ -3,6 +3,9 @@
     name:
       - htop
       - cron
+      - nano
+      - vim-tiny
+      - git
     state: present
     update_cache: yes
 
@@ -12,15 +15,25 @@
     dest: /metrics.sh
     mode: '0755'
 
+- name: Debug - Show metrics.sh exists
+  stat:
+    path: /metrics.sh
+  register: metrics_file
+
+- name: Debug - Output metrics file status
+  debug:
+    var: metrics_file
+
 - name: Add metrics.sh to crontab
   cron:
     name: "Run metrics.sh every 5 minutes"
     minute: "*/5"
     job: "/metrics.sh"
+  when: metrics_file.stat.exists
 
 - name: Add ansible-pull to crontab
   cron:
     name: "Run ansible-pull every hour"
     minute: "0"
     hour: "*"
-    job: "ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git"
+    job: "/usr/bin/ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git"
