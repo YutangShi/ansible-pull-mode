@@ -1,0 +1,8 @@
+---
+# filepath: /opt/docker/ansible-pull-mode/playbooks/send_failure_alert.yml
+- name: Send failure notification to Slack
+  shell: "/opt/docker/ansible-pull-mode/playbooks/send_slack_notification.sh '失敗' '{{ ansible_hostname }}'"
+  args:
+    executable: /bin/bash
+  delegate_to: localhost
+  changed_when: false

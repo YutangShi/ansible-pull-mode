@@ -6,6 +6,7 @@
       - nano
       - vim-tiny
       - git
+      - logrotate
     state: present
     update_cache: yes
 
@@ -35,4 +36,19 @@
   cron:
     name: "Run ansible-pull every hour"
     minute: "*/5"
-    job: "/usr/bin/ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git"
+    job: "/usr/bin/ansible-pull -U https://github.com/YutangShi/ansible-pull-mode.git >> /log/ansible-pull.log 2>&1"
+
+- name: Create initial ansible pull log file
+  file:
+    path: "/var/log/ansible-pull.log"
+    state: touch
+    mode: '0644'
+  changed_when: false
+
+- name: Copy logrotate configuration for ansible-pull logs
+  copy:
+    src: ansible-pull-logrotate
+    dest: /etc/logrotate.d/ansible-pull
+    owner: root
+    group: root
+    mode: '0644'

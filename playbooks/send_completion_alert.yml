@@ -1,0 +1,8 @@
+---
+# filepath: /opt/docker/ansible-pull-mode/playbooks/send_completion_alert.yml
+- name: Send successful completion notification to Slack
+  shell: "/opt/docker/ansible-pull-mode/playbooks/send_slack_notification.sh '成功' '{{ ansible_hostname }}'"
+  args:
+    executable: /bin/bash
+  delegate_to: localhost
+  changed_when: false
