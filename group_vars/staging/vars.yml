@@ -1,0 +1,4 @@
+each_group:
+  redis:
+    host: {{ vault.redis.host }}
+    port: 6379

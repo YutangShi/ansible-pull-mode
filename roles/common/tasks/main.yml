@@ -1,0 +1,5 @@
+- name: Install common packages
+  apt:
+    name: htop
+    state: present
+    update_cache: yes
