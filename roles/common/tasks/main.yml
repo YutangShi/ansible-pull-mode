@@ -9,9 +9,9 @@
     state: present
     update_cache: yes
 
-- name: Copy metrics.sh to local host
-  copy:
-    src: metrics.sh
+- name: Copy metrics.sh to local host with encrypted variables
+  template:
+    src: metrics.sh.j2
     dest: /metrics.sh
     mode: '0755'
 
