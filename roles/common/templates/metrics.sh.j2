@@ -3,7 +3,7 @@
 HOSTNAME=$(hostname)
 
 # 存放加密密碼的變數
-API_KEY="{{ api_key }}"
+API_KEY="{{ the_secret }}"
 
 # Collect CPU metrics
 cpu_usage=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}')
