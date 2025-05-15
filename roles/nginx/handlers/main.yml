@@ -1,6 +1,7 @@
 ---
 # filepath: /opt/docker/ansible-pull-mode/roles/nginx/handlers/main.yml
 - name: Restart Nginx
-  service:
-    name: nginx
-    state: restarted
+  command: "{{ item }}"
+  with_items:
+    - pkill nginx || true
+    - nginx

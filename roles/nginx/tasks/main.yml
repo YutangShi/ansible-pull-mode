@@ -30,8 +30,13 @@
     mode: '0644'
   notify: Restart Nginx
 
-- name: Ensure Nginx is running
-  service:
-    name: nginx
-    state: started
-    enabled: yes
+- name: Check if Nginx is running
+  command: pgrep nginx
+  register: nginx_status
+  changed_when: false
+  failed_when: false
+  check_mode: no
+
+- name: Start Nginx if not running
+  command: nginx
+  when: nginx_status.rc != 0
