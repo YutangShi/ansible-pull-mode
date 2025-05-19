@@ -78,12 +78,6 @@ ansible-pull-example/
 │           └── ssh_config.j2
 ```
 
-## 客製化
-
-1. 修改 `local.yml` 以包含您需要的角色和任務
-2. 更新 `setup-pull.sh` 中的儲存庫 URL
-3. 根據需要添加新的角色和任務
-
 ## 最佳實踐
 
 1. **版本控制**：確保所有 Ansible 程式碼都受到版本控制
